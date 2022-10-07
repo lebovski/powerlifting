@@ -1,23 +1,21 @@
 package main
 
 import (
-	"bufio"
 	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
 	"os"
-	"strconv"
-	"strings"
 
-	"calculate/internal/calculator"
-	"calculate/internal/config"
 	"github.com/jung-kurt/gofpdf"
+	"powerlifting/internal/calculator"
+	"powerlifting/internal/config"
 )
 
 func main() {
 	defaultPath := "./internal/config/config.json"
 	configPath := flag.String("c", defaultPath, "config file path")
+	flag.Parse()
 
 	configFile, err := os.Open(*configPath)
 	if err != nil {
@@ -33,13 +31,7 @@ func main() {
 		return
 	}
 
-	max, err := readFromConsole()
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-
-	c := calculator.NewCalculator(max, cfg)
+	c := calculator.NewCalculator(cfg)
 
 	cc, err := c.Calculate()
 	if err != nil {
@@ -48,17 +40,17 @@ func main() {
 	}
 
 	result := make([]string, 0, len(cc)+1)
-	result = append(result, max.String())
+	result = append(result, cfg.Maximums.String())
 	result = append(result, cc...)
 
-	err = saveAsPDF(result...)
+	err = saveAsPDF(cfg.Name, result...)
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
 }
 
-func saveAsPDF(txt ...string) error {
+func saveAsPDF(name string, txt ...string) error {
 	pwd, err := os.Getwd()
 	if err != nil {
 		return err
@@ -76,54 +68,10 @@ func saveAsPDF(txt ...string) error {
 
 	}
 
-	err = pdf.OutputFileAndClose("train.pdf")
+	err = pdf.OutputFileAndClose(fmt.Sprintf("%v.pdf", name))
 	if err != nil {
 		return err
 	}
 
 	return nil
-}
-
-func readFromConsole() (*calculator.MaxExercise, error) {
-	reader := bufio.NewReader(os.Stdin)
-
-	benchPress, err := readFromStdIn(reader, "Max Жим лёжа: ")
-	if err != nil {
-		return nil, err
-	}
-
-	deadLift, err := readFromStdIn(reader, "Max Становая тяга: ")
-	if err != nil {
-		return nil, err
-	}
-
-	squat, err := readFromStdIn(reader, "Max Присед: ")
-	if err != nil {
-		return nil, err
-	}
-
-	fmt.Print("\n")
-
-	return &calculator.MaxExercise{
-		BenchPress: benchPress,
-		DeadLift:   deadLift,
-		Squat:      squat,
-	}, nil
-}
-
-func readFromStdIn(reader *bufio.Reader, msg string) (float64, error) {
-	fmt.Print(msg)
-	val, err := reader.ReadString('\n')
-	if err != nil {
-		return 0, err
-	}
-
-	val = strings.Trim(val, " \n")
-
-	res, err := strconv.ParseFloat(val, 64)
-	if err != nil {
-		return 0, err
-	}
-
-	return res, nil
 }

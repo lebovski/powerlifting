@@ -1,96 +1,42 @@
 package config
 
-import (
-	"fmt"
-	"strings"
-)
-
-// ExerciseType отвечает за тип упражнения
-type ExerciseType int8
-
-const (
-	Press ExerciseType = iota + 1
-	PressMax
-	Lift
-	LiftMax
-	Squat
-	SquatMax
-)
-
-func (i ExerciseType) String() string {
-	switch i {
-	case Press:
-		return "Жим лёжа"
-	case PressMax:
-		return "Жим лёжа + max"
-	case Lift:
-		return "Становая тяга"
-	case LiftMax:
-		return "Становая тяга + max"
-	case Squat:
-		return "Присед"
-	case SquatMax:
-		return "Присед + max"
-	default:
-		panic(fmt.Sprintf("unexpected ExerciseType: %T", i))
-	}
-}
-
-func (i ExerciseType) MarshalJSON() ([]byte, error) {
-	switch i {
-	case Press:
-		return []byte("\"press\""), nil
-	case PressMax:
-		return []byte("\"press_max\""), nil
-	case Lift:
-		return []byte("\"lift\""), nil
-	case LiftMax:
-		return []byte("\"lift_max\""), nil
-	case Squat:
-		return []byte("\"squat\""), nil
-	case SquatMax:
-		return []byte("\"squat_max\""), nil
-	default:
-		return nil, fmt.Errorf("unknown exercise type: %v", i)
-	}
-}
-
-func (i *ExerciseType) UnmarshalJSON(b []byte) (err error) {
-	str := strings.ToLower(strings.Trim(string(b), "\""))
-	switch str {
-	case "press":
-		*i = Press
-	case "press_max":
-		*i = PressMax
-	case "lift":
-		*i = Lift
-	case "lift_max":
-		*i = LiftMax
-	case "squat":
-		*i = Squat
-	case "squat_max":
-		*i = SquatMax
-	default:
-		err = fmt.Errorf("unknown exercise type: %v", i)
-	}
-	return
-}
+import "fmt"
 
 type Config struct {
-	Round       float64       `json:"round"`
-	MicroCycles []*MicroCycle `json:"micro_cycle"`
+	Name         string        `json:"name"`
+	Maximums     *Maximum      `json:"maximum"`
+	Modification *Modification `json:"modification"`
+	Round        float64       `json:"round"`
+	MicroCycles  []*MicroCycle `json:"micro_cycle"`
+}
+
+type Maximum struct {
+	PressWeight float64 `json:"press_weight"`
+	PressRepeat int     `json:"press_repeat"`
+	LiftWeight  float64 `json:"lift_weight"`
+	LiftRepeat  int     `json:"lift_repeat"`
+	SquatWeight float64 `json:"squat_weight"`
+	SquatRepeat int     `json:"squat_repeat"`
+}
+
+func (m *Maximum) String() string {
+	return fmt.Sprintf(
+		"Max Жим:%v Повторы:%v\nMax Становая:%v Повторы:%v\nMax Присед:%v Повторы:%v\n",
+		m.PressWeight, m.PressRepeat, m.LiftWeight, m.LiftRepeat, m.SquatWeight, m.SquatRepeat,
+	)
+}
+
+type Modification struct {
+	AddPressRepeat int `json:"add_press_repeat"`
+	AddLiftRepeat  int `json:"add_lift_repeat"`
+	AddSquatRepeat int `json:"add_squat_repeat"`
+	MaxPercent     int `json:"max_percent"`
 }
 
 type MicroCycle struct {
 	Name      string        `json:"name"`
 	Warm      TrainingUnits `json:"warm"`
 	Trainings []*Exercise   `json:"trainings"`
-}
-
-type Exercise struct {
-	Name          string         `json:"name"`
-	ExerciseTypes []ExerciseType `json:"exercise_types"`
-	Training      TrainingUnits  `json:"training"`
 }
 
 type TrainingUnits []TrainingUnit
