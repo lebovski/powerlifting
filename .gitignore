@@ -1,0 +1,12 @@
+*.coverprofile
+*out
+*png
+id_rsa
+.idea
+*pprof
+
+# binaries
+calculate*
+
+# exclude
+!*.spec
