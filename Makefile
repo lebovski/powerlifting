@@ -4,7 +4,7 @@ ifeq (${SCHEMA_PATH},)
 	SCHEMA_LOCAL_PATH=${GOPATH}/src/gitlab.stageoffice.ru/UCS-COMMON/schema
 endif
 
-all: clean fix lint test build
+all: clean fix lint test build calculate
 
 fix:
 	gofmt -w .
@@ -17,8 +17,16 @@ clean:
 build:
 	go build -mod=readonly -o calculator main.go
 
-run: clean build
-	./calculator -c ./internal/config/config.json
+power:
+	./calculator -c ./internal/config/powerlifting.json
+
+power_light:
+	./calculator -c ./internal/config/powerlifting_light.json
+
+body:
+	./calculator -c ./internal/config/bodybuilding.json
+
+calculate: power power_light body
 
 test:
 	go test -mod=readonly -coverprofile overalls.coverprofile ./...

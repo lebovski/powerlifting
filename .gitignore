@@ -4,9 +4,10 @@
 id_rsa
 .idea
 *pprof
+*.pdf
 
 # binaries
-calculate*
+calculator*
 
 # exclude
 !*.spec
