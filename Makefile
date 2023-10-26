@@ -26,6 +26,10 @@ power_light:
 body:
 	./calculator -c ./internal/config/bodybuilding.json
 
+street:
+	./calculator -c ./internal/config/streetlifting_an.json
+	./calculator -c ./internal/config/streetlifting_ad.json
+
 calculate: power power_light body
 
 test:

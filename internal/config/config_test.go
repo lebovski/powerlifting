@@ -15,32 +15,32 @@ func Test_Config(t *testing.T) {
 				Trainings: []*Exercise{
 					{
 						Name:          "train 1",
-						ExerciseTypes: []ExerciseType{Squat, Press},
+						ExerciseTypes: []string{"Squat", "Press"},
 						Training:      TrainingUnits{{68, 4, 1}, {76, 3, 1}, {80, 3, 2}},
 					},
 					{
 						Name:          "train 2",
-						ExerciseTypes: []ExerciseType{Lift, Press},
+						ExerciseTypes: []string{"Lift", "Press"},
 						Training:      TrainingUnits{{64, 5, 1}, {68, 3, 4}},
 					},
 					{
 						Name:          "train 3",
-						ExerciseTypes: []ExerciseType{Squat, Press},
+						ExerciseTypes: []string{"Squat", "Press"},
 						Training:      TrainingUnits{{68, 4, 1}, {80, 3, 1}, {84, 2, 1}, {88, 1, 3}},
 					},
 					{
 						Name:          "train 4",
-						ExerciseTypes: []ExerciseType{Lift, Press},
+						ExerciseTypes: []string{"Lift", "Press"},
 						Training:      TrainingUnits{{68, 4, 1}, {76, 3, 1}, {80, 2, 3}},
 					},
 					{
 						Name:          "train 5",
-						ExerciseTypes: []ExerciseType{Squat, Press},
+						ExerciseTypes: []string{"Squat", "Press"},
 						Training:      TrainingUnits{{64, 5, 1}, {68, 4, 3}},
 					},
 					{
 						Name:          "train 6",
-						ExerciseTypes: []ExerciseType{Lift, Press},
+						ExerciseTypes: []string{"Lift", "Press"},
 						Training:      TrainingUnits{{68, 4, 1}, {80, 3, 1}, {84, 2, 1}, {88, 1, 3}},
 					},
 				},
