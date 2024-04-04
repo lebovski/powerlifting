@@ -18,7 +18,8 @@ build:
 	go build -mod=readonly -o calculator main.go
 
 power:
-	./calculator -c ./internal/config/powerlifting.json
+	./calculator -c ./internal/config/powerlifting_an.json
+	./calculator -c ./internal/config/powerlifting_dol.json
 
 power_light:
 	./calculator -c ./internal/config/powerlifting_light.json
@@ -26,7 +27,11 @@ power_light:
 body:
 	./calculator -c ./internal/config/bodybuilding.json
 
-calculate: power power_light body
+street:
+	./calculator -c ./internal/config/streetlifting_an.json
+	./calculator -c ./internal/config/streetlifting_ad.json
+
+calculate: power
 
 test:
 	go test -mod=readonly -coverprofile overalls.coverprofile ./...
