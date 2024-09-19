@@ -16,7 +16,17 @@
     "Шраги":    {"weight":  130, "repeat": 15},
 
     "ПрессНиз": {"weight":  0,  "repeat": 1},
-    "Пресс":    {"weight":  60, "repeat": 1}
+    "Пресс":    {"weight":  60, "repeat": 1},
+
+    "Свед":      {"weight":  130, "repeat": 20},
+    "Развед":    {"weight":  130, "repeat": 20},
+    "РазгВер":   {"weight":  100, "repeat": 1},
+    "РазгЗаГол": {"weight":  100, "repeat": 1},
+    "ПодтОбр":   {"weight":  20, "repeat": 1},
+    "БицEZ":     {"weight":  70, "repeat": 10},
+    "Гипер":     {"weight":  100, "repeat": 10},
+    "Вакуум":    {"weight":  0, "repeat": 1},
+    "Скакалка":  {"weight":  0, "repeat": 1}
   },
   "modification": {
     "Прис":     {"max_percent": 100, "add_repeat": 0},
@@ -34,7 +44,17 @@
     "Шраги":    {"max_percent": 100, "add_repeat": 0},
 
     "ПрессНиз": {"max_percent": 100, "add_repeat": 0},
-    "Пресс":    {"max_percent": 100, "add_repeat": 0}
+    "Пресс":    {"max_percent": 100, "add_repeat": 0},
+
+    "Свед":      {"max_percent": 100, "add_repeat": 0},
+    "Развед":    {"max_percent": 100, "add_repeat": 0},
+    "РазгВер":   {"max_percent": 100, "add_repeat": 0},
+    "РазгЗаГол": {"max_percent": 100, "add_repeat": 0},
+    "ПодтОбр":   {"max_percent": 100, "add_repeat": 0},
+    "БицEZ":     {"max_percent": 100, "add_repeat": 0},
+    "Гипер":     {"max_percent": 100, "add_repeat": 0},
+    "Вакуум":    {"max_percent": 100, "add_repeat": 0},
+    "Скакалка":  {"max_percent": 100, "add_repeat": 0}
   },
   "round": 2.5,
   "micro_cycle":[
@@ -47,6 +67,18 @@
         {"name":"Тренировка 1","exercise":["СпинНиз", "Шраги"],"training":[[30,10,1],[60,8,1],[70,5,3]]},
         {"name":"Тренировка 1","exercise":["ПрессНиз"],"training":[[0,15,3]]},
         {"name":"Тренировка 1","exercise":["Пресс"],"training":[[0,15,1],[10,10,3]]},
+
+        {"name":"Подсобка 1","exercise":["Свед"],"training":[[60,12,4]]},
+        {"name":"Подсобка 1","exercise":["Развед"],"training":[[60,12,4]]},
+        {"name":"Подсобка 1","exercise":["РазгВер"],"training":[[60,7,5]]},
+        {"name":"Подсобка 1","exercise":["РазгЗаГол"],"training":[[60,7,5]]},
+        {"name":"Подсобка 1","exercise":["ПодтОбр"],"training":[[60,10,3]]},
+        {"name":"Подсобка 1","exercise":["БицEZ"],"training":[[60,10,5]]},
+        {"name":"Подсобка 1","exercise":["Гипер"],"training":[[70,15,3]]},
+        {"name":"Подсобка 1","exercise":["ПрессНиз"],"training":[[0,15,4]]},
+        {"name":"Подсобка 1","exercise":["Пресс"],"training":[[0,15,1],[10,10,4]]},
+        {"name":"Подсобка 1","exercise":["Вакуум"],"training":[[0,15,4]]},
+        {"name":"Подсобка 1","exercise":["Скакалка"],"training":[[0,100,3]]},
 
         {"name":"Тренировка 2","exercise":["Стан","Жим"],"training":[[64,5,1],[68,4,3]], "warm":true},
         {"name":"Тренировка 2","exercise":["Жим"],"training":[[72,5,3]]},
